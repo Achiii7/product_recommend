@@ -69,6 +69,13 @@ def display_product(result):
             価格：{product['price']}
     """)
 
+    # 在庫ステータスに応じて表示（追加）
+    stock_status = product.get("stock_status")
+    if stock_status == ct.STOCK_LABEL_NONE:
+        st.error(f"{ct.STOCK_ICON_NONE} {ct.STOCK_MSG_NONE}")
+    elif stock_status == ct.STOCK_LABEL_FEW:
+        st.warning(f"{ct.STOCK_ICON_FEW} {ct.STOCK_MSG_FEW}")
+
     # 「商品カテゴリ」と「メーカー」と「ユーザー評価」
     st.code(f"""
         商品カテゴリ：{product['category']}\n
@@ -88,3 +95,4 @@ def display_product(result):
 
     # 商品ページのリンク
     st.link_button("商品ページを開く", type="primary", use_container_width=True, url="https://google.com")
+
